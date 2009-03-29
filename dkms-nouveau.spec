@@ -29,7 +29,7 @@ Open source DRI/DRM kernel module for NVIDIA cards using DKMS.
 %prep
 %setup -q -n %oname-%snapshot
 cd linux-core
-make drm_pciids.h
+sh ../scripts/create_linux_pci_lists.sh < ../shared-core/drm_pciids.txt
 # Now we hack the drm to coexist with kernel drm (can't still be loaded
 # at the same time due to /sys conflicts etc).
 # Rename exported symbols drm* => drm_mdv_nouveau*
@@ -70,7 +70,7 @@ rm -rf %{buildroot}
 dkms add     -m %{mname} -v %{version}-%{release} --rpm_safe_upgrade &&
 dkms build   -m %{mname} -v %{version}-%{release} --rpm_safe_upgrade &&
 dkms install -m %{mname} -v %{version}-%{release} --rpm_safe_upgrade --force &&
-rmmod nouveau drm drm_mdv_nouveau nvidia 2>&1
+rmmod nouveau drm drm_mdv_nouveau nvidia &>/dev/null
 true
 
 %preun
