@@ -1,33 +1,32 @@
-
 %define name	dkms-nouveau
 %define oname	drm
 %define mname	nouveau
 
 %define version	0.0.12
-%define snapshot 20090329
-%define release %mkrel 0.%snapshot.1
+%define snapshot 20090530
+%define release %mkrel 0.%{snapshot}.1
 
 Summary:	Nouveau DRI kernel DKMS module
-Name:		%name
-Version:	%version
-Release:	%release
+Name:		%{name}
+Version:	%{version}
+Release:	%{release}
 License:	MIT and GPLv2+
 Group:		System/Kernel and hardware
 # git clone git://anongit.freedesktop.org/git/mesa/drm/ ; cd drm
 # git archive --prefix=drm-$(date +%Y%m%d)/ --format=tar HEAD | bzip2 > ../drm-$(date +%Y%m%d).tar.bz2
-Source:		%oname-%snapshot.tar.bz2
-BuildRoot:	%{_tmppath}/%{name}-root
-BuildArch:	noarch
+Source0:	%{oname}-%{snapshot}.tar.bz2
 Obsoletes:	dkms-drm-experimental < 2.3.6
 Requires:	dkms
 Requires(post):	dkms
 Requires(preun):dkms
+BuildArch:	noarch
+BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 Open source DRI/DRM kernel module for NVIDIA cards using DKMS.
 
 %prep
-%setup -q -n %oname-%snapshot
+%setup -q -n %{oname}-%{snapshot}
 cd linux-core
 sh ../scripts/create_linux_pci_lists.sh < ../shared-core/drm_pciids.txt
 # Now we hack the drm to coexist with kernel drm (can't still be loaded
@@ -80,4 +79,3 @@ true
 %files
 %defattr(-,root,root)
 %{_usrsrc}/%{mname}-%{version}-%{release}
-
