@@ -2,7 +2,7 @@
 %define oname	drm
 %define mname	nouveau
 
-%define version	0.0.12
+%define version	0.0.13
 %define snapshot 20090530
 %define release %mkrel 0.%{snapshot}.1
 
