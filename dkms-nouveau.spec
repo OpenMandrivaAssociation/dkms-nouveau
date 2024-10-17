@@ -12,7 +12,7 @@ Version:	%{version}
 Release:	%{release}
 License:	MIT and GPLv2+
 Group:		System/Kernel and hardware
-URL:		http://nouveau.freedesktop.org/
+URL:		https://nouveau.freedesktop.org/
 # git clone git://anongit.freedesktop.org/git/mesa/drm/ ; cd drm
 # git archive --prefix=drm-$(date +%Y%m%d)/ --format=tar HEAD | bzip2 > ../drm-$(date +%Y%m%d).tar.bz2
 Source0:	%{oname}-%{snapshot}.tar.bz2
